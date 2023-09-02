@@ -1,1 +1,24 @@
-hello
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>URL Redirect</title>
+  <script>
+    function redirectUrl() {
+      const currentTime = new Date().getTime();
+      if (currentTime % 2 === 0) {
+        return "https://svtplay.se";
+      } else {
+        return "https://github.com/thheller/shadow-cljs";
+      }
+    }
+
+    function performRedirect() {
+      window.location = redirectUrl();
+    }
+
+    // Perform the redirect immediately when the page loads
+    performRedirect();
+  </script>
+</head>
+</html>
