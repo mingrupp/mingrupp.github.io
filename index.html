@@ -2,22 +2,29 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>URL Redirect</title>
+  <title>URL omdirigering (stig i sidled)</title>
   <script>
-    function redirectUrl() {
-      const currentTime = new Date().getTime();
-      if (currentTime % 2 === 0) {
-        return "https://www.poeter.se/Las+Text?textId=875837";
-      } else {
-        return "https://www.poeter.se/Las+Text?textId=875837";
+    async function fetchLinks() {
+      const response = await fetch('links.txt');
+      const text = await response.text();
+      return text.split('\n');
+    }
+  
+    function getRandomLink(links) {
+      const randomIndex = Math.floor(Math.random() * links.length);
+      return links[randomIndex];
+    }
+  
+    async function performRedirect() {
+      try {
+        const links = await fetchLinks();
+        const selectedLink = getRandomLink(links);
+        window.location = selectedLink;
+      } catch (error) {
+        console.error('Failed to redirect:', error);
       }
     }
-
-    function performRedirect() {
-      window.location = redirectUrl();
-    }
-
-    // Perform the redirect immediately when the page loads
+  
     performRedirect();
   </script>
 </head>
